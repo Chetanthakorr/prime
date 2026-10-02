@@ -35,6 +35,22 @@
 		"Subscribe now": "S'abonner maintenant",
 		"Read more": "Lire la suite",
 		"All": "Tous",
+		"We are extremely satisfied with Congo prime’s quality and execution. Good job done for our project": "Nous sommes extrêmement satisfaits de la qualité et de l’exécution de Congo Prime. Excellent travail réalisé pour notre projet.",
+		"They team delivered our residential project on time with perfect furniture and interior finishing.": "L’équipe a livré notre projet résidentiel dans les délais, avec un mobilier de qualité et une finition intérieure impeccable.",
+		"If you are looking for modern offices or retail projects, Congo Prime provides the best solution with quality construction.": "Si vous recherchez des bureaux modernes ou des projets commerciaux, Congo Prime offre une solution de qualité avec une construction soignée.",
+		"They always make quality projects with best construction. Kudos to the team Congo Prime": "Ils réalisent toujours des projets de qualité avec une excellente construction. Félicitations à l’équipe de Congo Prime.",
+		"I was also impressed with the professionalism of your team. Having worked with construction crews before, I think you have the best hands down.": "J’ai également été impressionné par le professionnalisme de votre équipe. Ayant déjà travaillé avec des équipes de construction, je pense que vous êtes sans aucun doute parmi les meilleurs.",
+		"Congo Prime has been more than a developer our project. From top to bottom they really performed as a true partner.": "Congo Prime a été bien plus qu’un simple développeur pour notre projet. Du début à la fin, l’équipe s’est véritablement comportée comme un partenaire.",
+		"We are extremely satisfied with Congo prime’s quality and execution. Good job done for our project.": "Nous sommes extrêmement satisfaits de la qualité et de l’exécution de Congo Prime. Excellent travail réalisé pour notre projet.",
+		"They always make quality projects with best construction. Kudos to the team Congo Prime.": "Ils réalisent toujours des projets de qualité avec une excellente construction. Félicitations à l’équipe de Congo Prime.",
+		"if you are looking for modern offices or retail projects, Congo Prime provides the best solution with quality construction.": "Si vous recherchez des bureaux modernes ou des projets commerciaux, Congo Prime offre une solution de qualité avec une construction soignée.",
+		"- Mr.Abbas kanani": "- Mr.Abbas kanani",
+		"- Mr.Sohil": "- Mr.Sohil",
+		"- Mr.luc kabange": "- Mr.luc kabange",
+		"- Mr.Kalis": "- Mr.Kalis",
+		"- Mr.Joseph bertier": "- Mr.Joseph bertier",
+		"- Mr.Danish": "- Mr.Danish",
+		"- Michale William": "- Michale William",
 		"Architecture Consultancy": "Conseil en architecture",
 		"Architecture": "Architecture",
 		"Construction": "Construction",
@@ -309,9 +325,14 @@
 
 	function translatePage(language) {
 		var translate = language === 'fr';
+		$('.testimonial-section h2, .testimonial-section .text, .testimonial-section .author-name, .testimonial-section .author-designation').each(function() {
+			var english = $(this).attr('data-english-testimonial') || $(this).data('english-testimonial') || normalizeTranslationText($(this).text());
+			english = getEnglishTranslation(english) || english;
+			$(this).attr('data-english-testimonial', english).data('english-testimonial', english).text(translate ? translateText(english) : english);
+		});
 		$('body').find('*').addBack().contents().filter(function() {
 			return this.nodeType === 3 && this.nodeValue.trim() &&
-				!$(this.parentNode).closest('script, style, .language-toggle').length;
+				!$(this.parentNode).closest('script, style, .language-toggle, .testimonial-section h2, .testimonial-section .text, .testimonial-section .author-name, .testimonial-section .author-designation').length;
 		}).each(function() {
 			if (translate) {
 				this._englishText = this._englishText || this.nodeValue;
